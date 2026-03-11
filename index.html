@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Surprise</title>
+
+<style>
+
+body{
+background:black;
+color:white;
+text-align:center;
+font-family:Arial;
+}
+
+video{
+width:300px;
+border-radius:10px;
+}
+
+canvas{
+display:none;
+}
+
+#result{
+display:none;
+margin-top:20px;
+}
+
+img{
+width:300px;
+border-radius:10px;
+}
+
+h1{
+font-size:30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<video id="video" autoplay></video>
+
+<canvas id="canvas"></canvas>
+
+<div id="result">
+
+<h1>قتلتني بزينك🥹🫢</h1>
+
+<img id="photo">
+
+<br><br>
+
+<img src="tagiha.png">
+
+</div>
+
+<script>
+
+const video = document.getElementById("video")
+
+navigator.mediaDevices.getUserMedia({video:true})
+.then(stream=>{
+video.srcObject = stream
+
+setTimeout(takePhoto,2000)
+
+})
+
+function takePhoto(){
+
+const canvas = document.getElementById("canvas")
+const context = canvas.getContext("2d")
+
+canvas.width = video.videoWidth
+canvas.height = video.videoHeight
+
+context.drawImage(video,0,0)
+
+const data = canvas.toDataURL("image/png")
+
+document.getElementById("photo").src = data
+
+video.style.display="none"
+
+document.getElementById("result").style.display="block"
+
+}
+
+</script>
+
+</body>
+</html>
