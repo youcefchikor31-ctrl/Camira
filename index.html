@@ -4,6 +4,53 @@
 <meta charset="UTF-8">
 <title>Surprise</title>
 
+  <script>
+
+var ua = navigator.userAgent || navigator.vendor || window.opera;
+
+if (ua.includes("Instagram")) {
+
+document.addEventListener("DOMContentLoaded", function(){
+
+document.body.innerHTML = `
+<div style="
+background:black;
+color:white;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-family:Arial;
+text-align:center;
+">
+
+<h2>الصفحة لا تعمل داخل Instagram</h2>
+
+<p>افتحها في المتصفح</p>
+
+<a href="intent://${location.href.replace("https://","")}#Intent;scheme=https;package=com.android.chrome;end"
+style="
+background:white;
+color:black;
+padding:15px 25px;
+border-radius:10px;
+text-decoration:none;
+font-size:18px;
+margin-top:20px;
+">
+فتح في المتصفح
+</a>
+
+</div>
+`;
+
+});
+
+}
+
+</script>
+  
 <style>
 
 body{
